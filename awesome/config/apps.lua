@@ -1,5 +1,5 @@
 local apps = {
-    terminal = "alacritty", 
+    terminal = "kitty", 
     launcher = "sh /home/user/.config/rofi/launch.sh", 
     launcherext = "rofi -show run",
     notifications = require("widgets.volume-brightness-notifications"), 
