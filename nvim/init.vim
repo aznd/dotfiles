@@ -31,6 +31,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
 
 Plug 'windwp/nvim-autopairs'
+Plug 'ojroques/nvim-bufdel'
+Plug 'karb94/neoscroll.nvim'
 
 " NEW STUFF
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -52,6 +54,7 @@ call plug#end()
 set termguicolors
 lua << EOF
 require('nvim-autopairs').setup{}
+require('neoscroll').setup()
 local colors = {
   bg = '#282828',
   black = '#282828',
@@ -227,12 +230,14 @@ end
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['pyright'].setup {
+require('lspconfig')['pylsp'].setup {
 capabilities = capabilities
 }
 
 require'nvim-tree'.setup()
 EOF
+
+let mapleader = " "
 
 vnoremap <S-k> <Cmd>lua require("dapui").eval()<CR>
 nnoremap tb <Cmd>lua require("dap").toggle_breakpoint()<CR>
@@ -242,3 +247,7 @@ nnoremap ti <Cmd>lua require("dap").step_into()<CR>
 nnoremap tq <Cmd>lua require("dap").terminate()<CR>
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <C-s> :w<CR>
+nnoremap <TAB> :BufferLineCycleNext<CR>
+nnoremap <S-Tab> :BufferLineCyclePrev<CR>
+nnoremap <silent><S-t> :tabnew<CR>
+nnoremap <silent><leader>x :BufDel<CR>
