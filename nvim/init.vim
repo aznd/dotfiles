@@ -30,6 +30,8 @@ Plug 'eddyekofo94/gruvbox-flat.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
 
+Plug 'windwp/nvim-autopairs'
+
 " NEW STUFF
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -41,10 +43,15 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
+" For debugging
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+
 call plug#end()
 
 set termguicolors
 lua << EOF
+require('nvim-autopairs').setup{}
 local colors = {
   bg = '#282828',
   black = '#282828',
@@ -70,6 +77,52 @@ EOF
 set completeopt=menu,menuone,noselect
 
 colorscheme gruvbox-flat
+
+lua <<EOF
+local dap = require("dap")
+local dapui = require("dapui")
+dapui.setup({
+    icons = { collapsed = "⮞", expanded = "⮟" },
+    sidebar = {
+        elements = {
+            { id = "breakpoints", size = 0.1 },
+            { id = "stacks", size = 0.25 },
+            { id = "watches", size = 0.1 },
+            { id = "scopes", size = 0.55 },
+        },
+        size = 44,
+        tray = {
+            size = 8,
+        },
+    }
+})
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+end
+
+dap.adapters.python = {
+    type = "executable";
+    command = "python";
+    args = { "-m", "debugpy.adapter" };
+}
+dap.configurations.python = {
+    {
+        type = "python";
+        request = "launch";
+        name = "Launch file";
+
+        program = "/home/user/Rare/rare/__main__.py";
+        pythonPath = "/usr/bin/python";
+    },
+}
+EOF
 
 lua << EOF
 
@@ -151,7 +204,26 @@ sources = cmp.config.sources({
   { name = 'cmdline' }
 })
 })
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
@@ -160,7 +232,13 @@ capabilities = capabilities
 }
 
 require'nvim-tree'.setup()
-
 EOF
 
+vnoremap <S-k> <Cmd>lua require("dapui").eval()<CR>
+nnoremap tb <Cmd>lua require("dap").toggle_breakpoint()<CR>
+nnoremap tc <Cmd>lua require("dap").continue()<CR>
+nnoremap tt <Cmd>lua require("dap").step_over()<CR>
+nnoremap ti <Cmd>lua require("dap").step_into()<CR>
+nnoremap tq <Cmd>lua require("dap").terminate()<CR>
 nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <C-s> :w<CR>
