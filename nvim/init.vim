@@ -18,23 +18,29 @@ set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
 
 call plug#begin()
+" better look
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
-
 Plug 'akinsho/bufferline.nvim'
 Plug 'feline-nvim/feline.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 
+" Colorschemes
+Plug 'rakr/vim-one'
 Plug 'eddyekofo94/gruvbox-flat.nvim'
+Plug 'tobi-wan-kenobi/zengarden'
+
+" Lsp stuff
 Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
 
+" Misc helper stuff
 Plug 'windwp/nvim-autopairs'
 Plug 'ojroques/nvim-bufdel'
 Plug 'karb94/neoscroll.nvim'
 
-" NEW STUFF
+" Auto completion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -79,7 +85,7 @@ EOF
 
 set completeopt=menu,menuone,noselect
 
-colorscheme gruvbox-flat
+colorscheme one
 
 lua <<EOF
 local dap = require("dap")
@@ -230,7 +236,7 @@ end
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['pylsp'].setup {
+require('lspconfig')['pyright'].setup {
 capabilities = capabilities
 }
 
