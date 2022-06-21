@@ -7,7 +7,3 @@ function run {
   fi
 }
 
-run picom -b
-run nm-applet --no-agent
-run setxkbmap de
-run mopidy

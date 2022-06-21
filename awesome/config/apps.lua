@@ -1,6 +1,6 @@
 local apps = {
-    terminal = "kitty", 
-    launcher = "sh /home/user/.config/rofi/launch.sh", 
+    terminal = "st",
+    launcher = "sh /home/user/.config/rofi/launch.sh",
     launcherext = "rofi -show run",
     notifications = require("widgets.volume-brightness-notifications"), 
     switcher = require("widgets.alt-tab"), 
@@ -13,8 +13,8 @@ local apps = {
 }
 
 user = {
-    terminal = "kitty", 
-    floating_terminal = "kitty"
+    terminal = "st",
+    floating_terminal = "st"
 }
 
 return apps

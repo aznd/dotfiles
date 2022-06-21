@@ -107,10 +107,12 @@ keys.globalkeys = gears.table.join(
             })
         end)
     end),
-     
+
+    awful.key( { modkey, "Shift"}, "i", function () awful.spawn("rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu") end),
+
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
-        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 -3%  ; pamixer --get-volume", function(stdout)
+        awful.spawn.easy_async_with_shell("amixer -D pulse set Master 3%-  ; pamixer --get-volume", function(stdout)
             local volume = stdout
             awful.spawn.easy_async_with_shell("pamixer --get-muted", function(stdout)
                 local muted = false
@@ -123,7 +125,7 @@ keys.globalkeys = gears.table.join(
         end)
     end),
     awful.key({}, "XF86AudioRaiseVolume", function ()
-        awful.spawn.easy_async_with_shell("pactl set-sink-volume 0 +3% ; pamixer --get-volume", function(stdout)
+        awful.spawn.easy_async_with_shell("amixer -D pulse set Master 3%+ ; pamixer --get-volume", function(stdout)
             local volume = stdout
             awful.spawn.easy_async_with_shell("pamixer --get-muted", function(stdout)
                 local muted = false
@@ -145,11 +147,11 @@ keys.globalkeys = gears.table.join(
             apps.notifications.volume(0, muted)
         end)
     end),
-    awful.key({}, "XF86AudioNext",             function () awful.spawn("playerctl next") end,
+    awful.key({}, "XF86AudioNext",             function () awful.spawn("mpc next") end,
               {description = "Next title", group = "launcher"}),
-    awful.key({}, "XF86AudioPrev",             function () awful.spawn("playerctl previous") end,
+    awful.key({}, "XF86AudioPrev",             function () awful.spawn("mpc prev") end,
               {description = "Previous title", group = "launcher"}),
-    awful.key({}, "XF86AudioPlay",             function () awful.spawn("playerctl play-pause") end,
+    awful.key({}, "XF86AudioPlay",             function () awful.spawn("mpc toggle") end,
               {description = "Play-Pause", group = "launcher"})
 )
 
