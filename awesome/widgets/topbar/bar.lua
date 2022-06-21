@@ -25,7 +25,6 @@ end
 
 -- Init widgets
 ------------------------------------------------
---local session = require("widgets.topbar.session")
 local taglist = require("widgets.topbar.taglist")
 local battery = require("widgets.topbar.battery")
 local clock = require("widgets.topbar.clock")
@@ -58,7 +57,6 @@ awful.screen.connect_for_each_screen(function(s)
         spacing = 10,
         expand = "none",
         {   -- Left
-            widget(session), 
             widget(bar_taglist),
             layout = wibox.layout.fixed.horizontal, 
         }, 
