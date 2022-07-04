@@ -7,3 +7,5 @@ function run {
   fi
 }
 
+run lxsession
+run mpd

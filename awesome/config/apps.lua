@@ -1,5 +1,5 @@
 local apps = {
-    terminal = "st",
+    terminal = "kitty",
     launcher = "sh /home/user/.config/rofi/launch.sh",
     launcherext = "rofi -show run",
     notifications = require("widgets.volume-brightness-notifications"), 
@@ -13,8 +13,8 @@ local apps = {
 }
 
 user = {
-    terminal = "st",
-    floating_terminal = "st"
+    terminal = "kitty",
+    floating_terminal = "kitty"
 }
 
 return apps
