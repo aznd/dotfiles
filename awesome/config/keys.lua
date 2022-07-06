@@ -109,6 +109,7 @@ keys.globalkeys = gears.table.join(
     end),
 
     awful.key( { modkey, "Shift"}, "i", function () awful.spawn("rofi -show power-menu -modi power-menu:~/.local/bin/rofi-power-menu") end),
+    awful.key( { modkey, "Control"}, "l", function () awful.spawn("xsecurelock") end),
 
     -- media controls
     awful.key({}, "XF86AudioLowerVolume", function ()
