@@ -1,5 +1,5 @@
 -- global core api used:
-    -- client
+-- client
 
 local awful = require("awful")
 local wibox = require("wibox")
@@ -26,45 +26,6 @@ local getTitlebar = function(args)
 
     local right = {
         layout = wibox.layout.fixed.horizontal,
-        {
-            widget = wibox.container.margin,
-            top = 7,
-            bottom = 7,
-            left = 0,
-            right = 10,
-            {
-                layout = wibox.layout.fixed.horizontal,
-                awful.titlebar.widget.minimizebutton(c)
-            }
-        },
-        {
-            widget = wibox.container.place,
-            {
-                widget = wibox.container.margin,
-                top = 7,
-                bottom = 7,
-                left = 0,
-                right = 10,
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    awful.titlebar.widget.maximizedbutton(c),
-                }
-            }
-        },
-        {
-            widget = wibox.container.place,
-            {
-                widget = wibox.container.margin,
-                top = 7,
-                bottom = 7,
-                left = 0,
-                right = 10,
-                {
-                    layout = wibox.layout.fixed.horizontal,
-                    awful.titlebar.widget.closebutton(c),
-                }
-            },
-        },
     }
 
     local titlebar = {
