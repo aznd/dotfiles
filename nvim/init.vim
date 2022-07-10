@@ -122,13 +122,13 @@ lua << EOF
 
 require("lsp")
 require("options")
+require("keys")
 
 EOF
 
 let mapleader = " "
 
 vnoremap <S-k> <Cmd>lua require("dapui").eval()<CR>
-nnoremap tb <Cmd>lua require("dap").toggle_breakpoint()<CR>
 nnoremap tc <Cmd>lua require("dap").continue()<CR>
 nnoremap tt <Cmd>lua require("dap").step_over()<CR>
 nnoremap ti <Cmd>lua require("dap").step_into()<CR>
@@ -139,3 +139,10 @@ nnoremap <TAB> :BufferLineCycleNext<CR>
 nnoremap <S-Tab> :BufferLineCyclePrev<CR>
 nnoremap <silent><S-t> :tabnew<CR>
 nnoremap <silent><leader>x :BufDel<CR>
+nnoremap <C-n> :NvimTreeFocus<CR>
+nnoremap <C-s> :w<CR>
+nnoremap <TAB> :BufferLineCycleNext<CR>
+nnoremap <S-Tab> :BufferLineCyclePrev<CR>
+nnoremap <silent><S-t> :tabnew<CR>
+nnoremap <silent><leader>x :BufDel<CR>
+nnoremap <C-S-n> :NvimTreeFocus<CR>
