@@ -21,15 +21,6 @@ cmp.setup {
 local cmp = require'cmp'
 
 cmp.setup({
-snippet = {
-  -- REQUIRED - you must specify a snippet engine
-  expand = function(args)
-    vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-    -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-    -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-    -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-  end,
-},
 mapping = {
   ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
   ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -44,9 +35,6 @@ mapping = {
 sources = cmp.config.sources({
   { name = 'nvim_lsp' },
   { name = 'vsnip' }, -- For vsnip users.
-  -- { name = 'luasnip' }, -- For luasnip users.
-  -- { name = 'ultisnips' }, -- For ultisnips users.
-  -- { name = 'snippy' }, -- For snippy users.
 }, {
   { name = 'buffer' },
 })
@@ -98,9 +86,27 @@ local on_attach = function(client, bufnr)
 end
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['pyright'].setup {
-capabilities = capabilities
+
+local servers = {
+    "cssls",
+	"cssmodules_ls",
+	"emmet_ls",
+	"html",
+	"jsonls",
+	"sumneko_lua",
+	"tsserver",
+	"yamlls",
+	"bashls",
+	"taplo",
+    "pyright",
 }
 
-require'nvim-tree'.setup()
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_status_ok then
+	return
+end
+
+for _, server in pairs(servers) do
+    lspconfig[server].setup({capabilities = capabilities})
+end
+
