@@ -13,3 +13,6 @@ vim.opt.mouse = "a"               -- enable mouse click
 vim.opt.clipboard = "unnamedplus" -- using system clipboard
 vim.opt.completeopt = { "menu", "menuone", "noselect"}
 vim.opt.termguicolors = true
+vim.opt.splitright = true
+
+vim.cmd("colorscheme onedarker")
