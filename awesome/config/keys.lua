@@ -226,15 +226,15 @@ keys.clientkeys = gears.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end ,
-        {description = "(un)maximize horizontally", group = "client"}), 
-    awful.key({ modkey             }, "c", awful.placement.centered), 
+        {description = "(un)maximize horizontally", group = "client"}),
+    awful.key({ modkey             }, "c", awful.placement.centered),
     awful.key({ modkey, "Shift"    }, "c", function(c)
         c.width = 450
         c.height = 250
-        
+
         awful.placement.top_left(c, {
             margins = {
-              top = beautiful.bar_height + 10, 
+              top = beautiful.bar_height + 10,
               left = 10
             }
           })

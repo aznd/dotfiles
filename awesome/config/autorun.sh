@@ -9,3 +9,6 @@ function run {
 
 run lxsession
 run mpd
+run xscreensaver
+run picom
+run ~/.fehbg
