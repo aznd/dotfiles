@@ -41,7 +41,6 @@ rules = {
           "Wine",
           "SpotGtk",
           "Rare",
-          "kitty"
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -63,19 +62,19 @@ rules = {
     },
     { rule_any = { class = { "firefox", "Chromium" }
       }, properties = { titlebars_enabled = false } },
-    
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
 
     { rule = { class = "Firefox" },
-      properties = { maximized  = false } }, 
+      properties = { maximized  = false } },
     { rule = { class = "Thunar" },
       properties = { floating  = true },
       callback = function (c)
         awful.placement.centered(c,nil)
       end
-    }, 
+    },
     { rule = { class = "Pavucontrol" },
       properties = { floating  = true },
       callback = function (c)
@@ -83,26 +82,26 @@ rules = {
         c.height = 350
         awful.placement.top_right(c, {
           margins = {
-            top = beautiful.bar_height + 5, 
+            top = beautiful.bar_height + 5,
             right = 5
           }
         })
       end
-    }, 
+    },
     { rule = { class = "Lxappearance" },
       properties = { floating  = true },
-    }, 
+    },
     { rule = { class = "Cisco AnyConnect Secure Mobility Client" },
-      properties = { floating = true }, 
+      properties = { floating = true },
       callback = function (c)
         awful.placement.top_right(c, {
           margins = {
-            top = beautiful.bar_height + 5, 
+            top = beautiful.bar_height + 5,
             right = 5
           }
         })
       end
-    }, 
+    },
     {
       rule = {
         class = "jetbrains-.*",
@@ -115,24 +114,24 @@ rules = {
           focusable = false,
           ontop = true,
           placement = awful.placement.restore,
-          buttons = {}, 
+          buttons = {},
           titlebars_enabled = false
       }
-    }, 
+    },
     { rule = { class = "Visualboyadvance-m" },
-      properties = { 
-        floating  = true, 
+      properties = {
+        floating  = true,
       },
     },
     { rule = { instance = "floating_terminal" },
-      properties = { 
-        floating  = true, 
+      properties = {
+        floating  = true,
       },
-    }, 
+    },
     { rule = { class = "Spotify" },
-      properties = { 
-        maximized_vertical  = true, 
-        maximized_horizontal  = true, 
+      properties = {
+        maximized_vertical  = true,
+        maximized_horizontal  = true,
       },
     },
 }

@@ -1,16 +1,12 @@
-local awful = require("awful")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local watch = require("awful.widget.watch")
-local wibox = require("wibox")
-local gfs = require("gears.filesystem")
-local dpi = require('beautiful').xresources.apply_dpi
 
 local function show_battery_warning(charge)
     local bg = beautiful.bg_normal
     local fg = beautiful.fg_normal
 
-    if charge < 3 then 
+    if charge < 3 then
         bg = beautiful.highlight
         fg = beautiful.bg_normal
     end
@@ -22,7 +18,7 @@ local function show_battery_warning(charge)
         title = "Battery may run out soon!",
         timeout = 25, -- show the warning for a longer time
         hover_timeout = 0.5,
-        fg = fg, 
+        fg = fg,
         bg = bg
     }
 end
@@ -40,7 +36,7 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
 
     for s in stdout:gmatch("[^\r\n]+") do
         local status, charge_str, time = string.match(s, '.+: (%a+), (%d?%d?%d)%%,?(.*)')
-        
+
         if status == "Charging" then charging = true end
 
         if status ~= nil then
