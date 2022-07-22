@@ -96,6 +96,7 @@ keys.globalkeys = gears.table.join(
 
     awful.key({ modkey },            "d", function () awful.spawn(apps.launcher) end),
     awful.key({ modkey, "Shift" },   "d", function () awful.spawn(apps.launcherext) end ),
+    awful.key({ modkey, "Shift" },   "c", function () awful.spawn(apps.roficalc) end ),
     awful.key({ modkey }, "p",     function () awful.spawn(apps.xrandr) end),
     awful.key({ modkey, "Shift" }, "p",     function () 
         awful.spawn.easy_async_with_shell(apps.screenshot, function(stdout)
@@ -228,6 +229,7 @@ keys.clientkeys = gears.table.join(
         end ,
         {description = "(un)maximize horizontally", group = "client"}),
     awful.key({ modkey             }, "c", awful.placement.centered),
+    --[[
     awful.key({ modkey, "Shift"    }, "c", function(c)
         c.width = 450
         c.height = 250
@@ -239,6 +241,7 @@ keys.clientkeys = gears.table.join(
             }
           })
     end)
+    --]]
 )
 
 keys.clientbuttons = gears.table.join(
