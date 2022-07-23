@@ -70,6 +70,9 @@ return packer.startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
 
+    -- formatter
+    use 'andrejlevkovitch/vim-lua-format'
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end

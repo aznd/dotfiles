@@ -10,7 +10,7 @@ key("i", "jk", "<esc>")
 
 -- terminal
 key("n", "<leader>tt", toggleterm.toggleDefault)
-key("t", "<Esc>", "<C-\\><C-n>")
+key("t", "<Esc>", "<C-\\><C-n><q>")
 
 -- split navigation
 key("n", "<c-h>", "<c-w>h")

@@ -14,7 +14,6 @@ naughty.config.defaults.shape = function(cr, width, height)
     gears.shape.rounded_rect(cr, width, height, dpi(4))
 end
 
-
 -- Presets
 naughty.config.presets.low.timeout = 5
 

@@ -10,12 +10,9 @@ local apps = {
     volume = "pavucontrol",
     appearance = "lxappearance",
     browser = "firefox",
-    fileexplorer = "thunar",
+    fileexplorer = "thunar"
 }
 
-user = {
-    terminal = "kitty",
-    floating_terminal = "kitty"
-}
+user = {terminal = "kitty", floating_terminal = "kitty"}
 
 return apps
