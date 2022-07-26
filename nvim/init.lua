@@ -1,8 +1,9 @@
 require("user.options")
+require("user.plugins")
 require("user.utils")
 require("user.lsp")
+require("user.null-ls")
 require("user.keys")
-require("user.plugins")
 require("user.toggleterm")
 require("nvim-tree").setup()
 require("nvim-autopairs").setup{}

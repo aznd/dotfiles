@@ -50,6 +50,8 @@ return packer.startup(function(use)
     -- lsp stuff
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind-nvim'
+    use("jose-elias-alvarez/null-ls.nvim")
+	 use("williamboman/nvim-lsp-installer")
 
     -- misc helper stuff
     use 'windwp/nvim-autopairs'
@@ -63,15 +65,16 @@ return packer.startup(function(use)
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
 
+    -- vsnip
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/vim-vsnip'
+
     -- terminal
     use 'akinsho/toggleterm.nvim'
 
     -- telescope
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
-
-    -- formatter
-    use 'andrejlevkovitch/vim-lua-format'
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
